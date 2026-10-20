@@ -1,0 +1,6 @@
+{
+  "name":"daily-ai-assistant-client","private":true,"version":"1.0.0","type":"module",
+  "scripts":{"dev":"vite","build":"tsc && vite build","preview":"vite preview"},
+  "dependencies":{"@vitejs/plugin-react":"latest","lucide-react":"latest","react":"latest","react-dom":"latest","recharts":"latest","tailwindcss":"latest","vite":"latest","typescript":"latest"},
+  "devDependencies":{"autoprefixer":"latest","postcss":"latest"}
+}
