@@ -39,6 +39,8 @@ jobs:
         run: npm ci --prefix client
 
       - name: Build web app and sync Capacitor
+        env:
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
         run: npm --prefix client run cap:sync
 
       - name: Make Gradle wrapper executable
