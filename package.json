@@ -5,6 +5,11 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "tsx watch server/src/index.ts",
     "client": "npm --prefix client run dev",
+    "cap:sync": "cap sync",
+    "cap:open:android": "cap open android",
+    "cap:open:ios": "cap open ios",
+    "db:up": "docker compose up -d db",
+    "db:down": "docker compose down",
     "build": "npm run build:server && npm --prefix client run build",
     "build:server": "tsc -p server/tsconfig.json",
     "seed": "tsx prisma/seed.ts",
@@ -12,13 +17,21 @@
   },
   "dependencies": {
     "@prisma/client": "^6.15.0",
+    "@supabase/supabase-js": "^2.118.0",
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "dotenv": "^18.0.8",
     "express": "^5.1.0",
     "express-rate-limit": "^8.0.1",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^1.60.0",
+    "nodemailer": "^10.2.1",
+    "openai": "^7.40.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "recharts": "^3.10.1",
     "zod": "^4.1.5"
   },
   "devDependencies": {
@@ -27,9 +40,14 @@
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.3.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "concurrently": "^9.2.1",
     "prisma": "^6.15.0",
     "tsx": "^4.20.5",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.3"
+  },
+  "overrides": {
+    "deepmerge-ts": "^8.0.0"
   }
 }
