@@ -1776,7 +1776,7 @@ app.use(
 // --------------------------------------------------
 // START SERVER
 // --------------------------------------------------
-const server = app.listen(port, () => {
+const server = app.listen(port, "0.0.0.0", () => {
   console.log(`✅ API listening on port ${port}`);
   console.log(`✅ NODE_ENV = ${process.env.NODE_ENV || "not set"}`);
 });
