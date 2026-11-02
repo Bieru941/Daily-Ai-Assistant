@@ -19,6 +19,10 @@ app.disable("etag");
 
 const port = Number(process.env.PORT || 4000);
 const jwtSecret = process.env.JWT_SECRET;
+console.log("JWT_SECRET diagnostic:", {
+  exists: Boolean(jwtSecret),
+  length: jwtSecret?.length ?? 0,
+});
 const adminEmails = new Set(
   (process.env.ADMIN_EMAILS || "")
     .split(",")
