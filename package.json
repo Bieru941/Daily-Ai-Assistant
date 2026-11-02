@@ -12,6 +12,7 @@
     "db:down": "docker compose down",
     "build": "npm run build:server && npm --prefix client run build",
     "build:server": "tsc -p server/tsconfig.json",
+    "start": "node server/dist/index.js",
     "seed": "tsx prisma/seed.ts",
     "prisma": "prisma"
   },
