@@ -25,33 +25,30 @@ export async function api<T = unknown>(
     ? path
     : `/${path}`;
 
-  const url = `${API_URL}/api${normalizedPath}`;
+  const url = API_URL
+    ? `${API_URL}${normalizedPath.startsWith("/api/")
+        ? normalizedPath
+        : `/api${normalizedPath}`}`
+    : normalizedPath.startsWith("/api/")
+      ? normalizedPath
+      : `/api${normalizedPath}`;
 
   const response = await fetch(url, {
     ...options,
     credentials: "include",
     headers: {
-      ...(options.body ? { "Content-Type": "application/json" } : {}),
+      "Content-Type": "application/json",
       ...options.headers,
     },
   });
 
-  const data: unknown = await response.json().catch(() => null);
+  const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    if (response.status === 401) {
-      window.dispatchEvent(new Event("auth:unauthorized"));
-    }
-
-    const message =
-      typeof data === "object" &&
-      data !== null &&
-      "error" in data &&
-      typeof data.error === "string"
-        ? data.error
-        : `Request failed (${response.status})`;
-
-    throw new ApiError(message, response.status);
+    throw new ApiError(
+      data?.message || data?.error || "Something went wrong.",
+      response.status
+    );
   }
 
   return data as T;
