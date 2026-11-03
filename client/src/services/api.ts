@@ -1,18 +1,7 @@
+const API =
+  import.meta.env.VITE_API_URL || "/api";
 
-import { Capacitor } from "@capacitor/core";
-
-const API_URL = (
-  import.meta.env.VITE_API_URL || ""
-).replace(/\/+$/, "");
-
-export class ApiError extends Error {
-  constructor(message: string, public readonly status: number) {
-    super(message);
-    this.name = "ApiError";
-  }
-}
-
-export async function api<T = unknown>(
+export async function api<T = any>(
   path: string,
   options: RequestInit = {}
 ): Promise<T> {
