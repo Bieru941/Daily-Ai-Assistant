@@ -1,12 +1,24 @@
-const API =
-  import.meta.env.VITE_API_URL || "/api";
+import { Capacitor } from "@capacitor/core";
 
-export async function api<T = any>(
+const API_URL = (
+  import.meta.env.VITE_API_URL || ""
+).replace(/\/+$/, "");
+
+export class ApiError extends Error {
+  constructor(message: string, public readonly status: number) {
+    super(message);
+    this.name = "ApiError";
+  }
+}
+
+export async function api<T = unknown>(
   path: string,
   options: RequestInit = {}
 ): Promise<T> {
   if (Capacitor.isNativePlatform() && !API_URL) {
-    throw new Error("Set VITE_API_URL to your deployed API URL before building the mobile app.");
+    throw new Error(
+      "Set VITE_API_URL to your deployed API URL before building the mobile app."
+    );
   }
 
   const normalizedPath = path.startsWith("/")
